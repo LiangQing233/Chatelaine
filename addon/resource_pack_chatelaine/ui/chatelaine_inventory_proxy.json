@@ -1,0 +1,1430 @@
+{
+  "namespace": "chatelaine_inventory",
+
+  "item_layer@common.item_renderer_additional_layer": {
+    "size": ["100%", "100%"],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "bindings": [
+      { "binding_name": "#visible", "binding_condition": "always" },
+      { "binding_name": "#uv", "binding_condition": "always_when_visible" },
+      { "binding_name": "#uv_size", "binding_condition": "always_when_visible" },
+      { "binding_name": "#texture", "binding_condition": "always_when_visible" }
+    ]
+  },
+  "layered_item_renderer": {
+    "type": "custom",
+    "renderer": "inventory_item_renderer",
+    "controls": [
+      {
+        "top_layer_3@chatelaine_inventory.item_layer": {
+          "$item_renderer_additional_layer_layer": 3
+        }
+      },
+      {
+        "top_layer_2@chatelaine_inventory.item_layer": {
+          "$item_renderer_additional_layer_layer": 2
+        }
+      },
+      {
+        "top_layer_1@chatelaine_inventory.item_layer": {
+          "$item_renderer_additional_layer_layer": 1
+        }
+      },
+      {
+        "bottom_layer_1@chatelaine_inventory.item_layer": {
+          "$item_renderer_additional_layer_layer": -1
+        }
+      },
+      {
+        "bottom_layer_2@chatelaine_inventory.item_layer": {
+          "$item_renderer_additional_layer_layer": -2
+        }
+      }
+    ]
+  },
+
+  "replica_slot_button": {
+    "type": "button",
+    "size": ["100%", "100%"],
+    "layer": 3,
+    "default_control": "default",
+    "hover_control": "hover",
+    "pressed_control": "pressed",
+    "focus_enabled": true,
+    "focus_magnet_enabled": true,
+    "is_handle_button_move_event": true,
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "$primary_button_name",
+        "mapping_type": "pressed",
+        "consume_event": true
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "$primary_button_name",
+        "mapping_type": "pressed",
+        "consume_event": true
+      },
+      {
+        "from_button_id": "button.menu_secondary_select",
+        "to_button_id": "$secondary_button_name",
+        "mapping_type": "pressed",
+        "consume_event": true
+      },
+      {
+        "from_button_id": "button.menu_auto_place",
+        "to_button_id": "$quick_button_name",
+        "mapping_type": "pressed",
+        "consume_event": true
+      }
+    ],
+    "controls": [
+      { "default": { "type": "panel", "size": ["100%", "100%"] } },
+      {
+        "hover": {
+          "type": "panel",
+          "size": ["100%", "100%"],
+          "controls": [
+            {
+              "hover_image": {
+                "type": "image",
+                "size": ["100%", "100%"],
+                "texture": "$hover_texture",
+                "layer": 4,
+                "alpha": 0.8,
+                "visible": false,
+                "bindings": [
+                  {
+                    "binding_name": "(not #using_touch)",
+                    "binding_name_override": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "hover_text@common.hover_text": {
+                "layer": 80,
+                "visible": false,
+                "$hover_text_max_width": 0,
+                "bindings": [
+                  {
+                    "binding_name": "(not #using_touch)",
+                    "binding_name_override": "#visible"
+                  },
+                  {
+                    "binding_type": "collection",
+                    "binding_collection_name": "$item_collection_name",
+                    "binding_name": "#chatelaine_hover_text",
+                    "binding_name_override": "#hover_text",
+                    "binding_condition": "always_when_visible"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "pressed": {
+          "type": "image",
+          "size": ["100%", "100%"],
+          "texture": "$hover_texture"
+        }
+      }
+    ]
+  },
+
+  "replica_slot": {
+    "type": "input_panel",
+    "size": "$cell_size",
+    "visible": false,
+    "layer": 1,
+    "$cell_size|default": [18, 18],
+    "$item_size|default": [16, 16],
+    "$durability_size|default": [12, 1],
+    "$durability_offset|default": [0, 5],
+    "$hover_texture|default": "textures/ui/slot_disabled_hover",
+    "$selection_texture|default": "textures/ui/pocket_ui_highlight_selected_slot",
+    "$selection_size|default": [23, 23],
+    "$lock_badge_offset|default": [0, 0],
+    "$item_collection_name|default": "chatelaine_inventory_bag",
+    "$primary_button_name|default": "#chatelaine_inventory_bag_primary",
+    "$secondary_button_name|default": "#chatelaine_inventory_bag_secondary",
+    "$quick_button_name|default": "#chatelaine_inventory_bag_quick",
+    "controls": [
+      {
+        "background": {
+          "type": "image",
+          "size": "$cell_size",
+          "texture": "textures/ui/cell_image",
+          "visible": false
+        }
+      },
+      {
+        "selected_background": {
+          "type": "image",
+          "size": "$cell_size",
+          "layer": 8,
+          "texture": "textures/ui/recipe_book_touch_cell_selected",
+          "visible": false,
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_selected",
+              "binding_name_override": "#visible",
+              "binding_condition": "always"
+            }
+          ]
+        }
+      },
+      {
+        "item@chatelaine_inventory.layered_item_renderer": {
+          "size": "$item_size",
+          "layer": 12,
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false
+        }
+      },
+      {
+        "empty_icon": {
+          "type": "image",
+          "size": "$item_size",
+          "layer": 3,
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false,
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_empty_texture",
+              "binding_name_override": "#texture",
+              "binding_condition": "always_when_visible"
+            }
+          ]
+        }
+      },
+      {
+        "stack_count": {
+          "type": "label",
+          "anchor_from": "bottom_right",
+          "anchor_to": "bottom_right",
+          "offset": [0, 1],
+          "layer": 20,
+          "shadow": true,
+          "color": "$item_stack_count_color",
+          "text": "#chatelaine_stack_text",
+          "visible": false,
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_stack_visible",
+              "binding_name_override": "#visible",
+              "binding_condition": "always"
+            },
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_stack_text",
+              "binding_condition": "always_when_visible"
+            }
+          ]
+        }
+      },
+      {
+        "durability": {
+          "type": "custom",
+          "renderer": "progress_bar_renderer",
+          "size": "$durability_size",
+          "offset": "$durability_offset",
+          "layer": 21,
+          "visible": false,
+          "property_bag": {
+            "drop_shadow": true,
+            "is_durability": true,
+            "round_value": true
+          },
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_durability_visible",
+              "binding_name_override": "#visible",
+              "binding_condition": "always"
+            },
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_durability_visible",
+              "binding_name_override": "#touch_progress_bar_visible",
+              "binding_condition": "always"
+            },
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_durability_total",
+              "binding_name_override": "#progress_bar_total_amount",
+              "binding_condition": "always"
+            },
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_durability_current",
+              "binding_name_override": "#progress_bar_current_amount",
+              "binding_condition": "always"
+            }
+          ]
+        }
+      },
+      {
+        "item_lock_cell_image": {
+          "type": "image",
+          "size": "$cell_size",
+          "layer": 9,
+          "texture": "textures/ui/cell_image_lock",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false,
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_item_locked",
+              "binding_name_override": "#visible",
+              "binding_condition": "always"
+            }
+          ]
+        }
+      },
+      {
+        "lock_in_inventory_overlay": {
+          "type": "image",
+          "size": "$item_size",
+          "offset": "$lock_badge_offset",
+          "layer": 23,
+          "texture": "textures/ui/item_lock_yellow",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false,
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_lock_in_inventory",
+              "binding_name_override": "#visible",
+              "binding_condition": "always"
+            }
+          ]
+        }
+      },
+      {
+        "lock_in_slot_overlay": {
+          "type": "image",
+          "size": "$item_size",
+          "offset": "$lock_badge_offset",
+          "layer": 24,
+          "texture": "textures/ui/item_lock_red",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false,
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_lock_in_slot",
+              "binding_name_override": "#visible",
+              "binding_condition": "always"
+            }
+          ]
+        }
+      },
+      {
+        "selected_marker": {
+          "type": "image",
+          "size": "$selection_size",
+          "layer": 19,
+          "texture": "$selection_texture",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false,
+          "bindings": [
+            {
+              "binding_type": "collection",
+              "binding_collection_name": "$item_collection_name",
+              "binding_name": "#chatelaine_selected",
+              "binding_name_override": "#visible",
+              "binding_condition": "always"
+            }
+          ]
+        }
+      },
+      {
+        "slot_button@chatelaine_inventory.replica_slot_button": {
+          "visible": false,
+          "$item_collection_name": "$item_collection_name",
+          "$primary_button_name": "$primary_button_name",
+          "$secondary_button_name": "$secondary_button_name",
+          "$quick_button_name": "$quick_button_name",
+          "$hover_texture": "$hover_texture"
+        }
+      }
+    ]
+  },
+
+  "classic_bag_slot@chatelaine_inventory.replica_slot": {
+    "$item_collection_name": "chatelaine_inventory_bag",
+    "$primary_button_name": "#chatelaine_inventory_bag_primary",
+    "$secondary_button_name": "#chatelaine_inventory_bag_secondary",
+    "$quick_button_name": "#chatelaine_inventory_bag_quick"
+  },
+  "classic_hotbar_slot@chatelaine_inventory.replica_slot": {
+    "$item_collection_name": "chatelaine_inventory_hotbar",
+    "$primary_button_name": "#chatelaine_inventory_hotbar_primary",
+    "$secondary_button_name": "#chatelaine_inventory_hotbar_secondary",
+    "$quick_button_name": "#chatelaine_inventory_hotbar_quick"
+  },
+  "pocket_bag_slot@chatelaine_inventory.replica_slot": {
+    "$cell_size": [28, 28],
+    "$item_size": [24, 24],
+    "$durability_size": [18, 1],
+    "$durability_offset": [0, 8],
+    "$hover_texture": "textures/ui/slot_disabled_hover_pocket",
+    "$selection_texture": "textures/ui/pocket_ui_highlight_selected_slot",
+    "$selection_size": ["100% + 4px", "100% + 4px"],
+    "$lock_badge_offset": [-1, -1],
+    "$item_collection_name": "chatelaine_inventory_bag",
+    "$primary_button_name": "#chatelaine_inventory_bag_primary",
+    "$secondary_button_name": "#chatelaine_inventory_bag_secondary",
+    "$quick_button_name": "#chatelaine_inventory_bag_quick"
+  },
+  "static_pocket_bag_slot_button": {
+    "type": "button",
+    "size": ["100%", "100%"],
+    "layer": 3,
+    "default_control": "default",
+    "hover_control": "hover",
+    "pressed_control": "pressed",
+    "focus_enabled": true,
+    "focus_magnet_enabled": true,
+    "is_handle_button_move_event": true,
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "#chatelaine_inventory_bag_primary",
+        "mapping_type": "pressed",
+        "consume_event": true
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "#chatelaine_inventory_bag_primary",
+        "mapping_type": "pressed",
+        "consume_event": true
+      },
+      {
+        "from_button_id": "button.menu_secondary_select",
+        "to_button_id": "#chatelaine_inventory_bag_secondary",
+        "mapping_type": "pressed",
+        "consume_event": true
+      },
+      {
+        "from_button_id": "button.menu_auto_place",
+        "to_button_id": "#chatelaine_inventory_bag_quick",
+        "mapping_type": "pressed",
+        "consume_event": true
+      }
+    ],
+    "controls": [
+      { "default": { "type": "panel", "size": ["100%", "100%"] } },
+      {
+        "hover": {
+          "type": "panel",
+          "size": ["100%", "100%"],
+          "controls": [
+            {
+              "hover_image": {
+                "type": "image",
+                "size": ["100%", "100%"],
+                "texture": "textures/ui/slot_disabled_hover_pocket",
+                "layer": 4,
+                "alpha": 0.8,
+                "visible": false,
+                "bindings": [
+                  {
+                    "binding_name": "(not #using_touch)",
+                    "binding_name_override": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "hover_text@common.hover_text": {
+                "layer": 80,
+                "visible": false,
+                "$hover_text_max_width": 0,
+                "property_bag": { "#hover_text": "" },
+                "bindings": [
+                  {
+                    "binding_name": "(not #using_touch)",
+                    "binding_name_override": "#visible"
+                  },
+                  {
+                    "binding_name": "#hover_text"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "pressed": {
+          "type": "image",
+          "size": ["100%", "100%"],
+          "texture": "textures/ui/slot_disabled_hover_pocket"
+        }
+      }
+    ]
+  },
+  "static_pocket_bag_slot": {
+    "type": "input_panel",
+    "size": [28, 28],
+    "visible": false,
+    "layer": 1,
+    "controls": [
+      {
+        "background": {
+          "type": "image",
+          "size": [28, 28],
+          "texture": "textures/ui/cell_image",
+          "visible": false
+        }
+      },
+      {
+        "selected_background": {
+          "type": "image",
+          "size": [28, 28],
+          "layer": 8,
+          "texture": "textures/ui/recipe_book_touch_cell_selected",
+          "visible": false
+        }
+      },
+      {
+        "item@chatelaine_inventory.layered_item_renderer": {
+          "size": [24, 24],
+          "layer": 12,
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false
+        }
+      },
+      {
+        "empty_icon": {
+          "type": "image",
+          "size": [24, 24],
+          "layer": 3,
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false
+        }
+      },
+      {
+        "stack_count": {
+          "type": "label",
+          "anchor_from": "bottom_right",
+          "anchor_to": "bottom_right",
+          "offset": [0, 1],
+          "layer": 20,
+          "shadow": true,
+          "color": "$item_stack_count_color",
+          "text": "",
+          "visible": false
+        }
+      },
+      {
+        "durability": {
+          "type": "custom",
+          "renderer": "progress_bar_renderer",
+          "size": [18, 1],
+          "offset": [0, 8],
+          "layer": 21,
+          "visible": false,
+          "property_bag": {
+            "drop_shadow": true,
+            "is_durability": true,
+            "round_value": true,
+            "#touch_progress_bar_visible": true,
+            "#progress_bar_total_amount": 1,
+            "#progress_bar_current_amount": 1
+          },
+          "bindings": []
+        }
+      },
+      {
+        "item_lock_cell_image": {
+          "type": "image",
+          "size": [28, 28],
+          "layer": 9,
+          "texture": "textures/ui/cell_image_lock",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false
+        }
+      },
+      {
+        "lock_in_inventory_overlay": {
+          "type": "image",
+          "size": [24, 24],
+          "offset": [-1, -1],
+          "layer": 23,
+          "texture": "textures/ui/item_lock_yellow",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false
+        }
+      },
+      {
+        "lock_in_slot_overlay": {
+          "type": "image",
+          "size": [24, 24],
+          "offset": [-1, -1],
+          "layer": 24,
+          "texture": "textures/ui/item_lock_red",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false
+        }
+      },
+      {
+        "selected_marker": {
+          "type": "image",
+          "size": ["100% + 4px", "100% + 4px"],
+          "layer": 19,
+          "texture": "textures/ui/pocket_ui_highlight_selected_slot",
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "visible": false
+        }
+      },
+      {
+        "slot_button@chatelaine_inventory.static_pocket_bag_slot_button": {
+          "visible": false
+        }
+      }
+    ]
+  },
+  "pocket_hotbar_slot@chatelaine_inventory.pocket_bag_slot": {
+    "$item_collection_name": "chatelaine_inventory_hotbar",
+    "$primary_button_name": "#chatelaine_inventory_hotbar_primary",
+    "$secondary_button_name": "#chatelaine_inventory_hotbar_secondary",
+    "$quick_button_name": "#chatelaine_inventory_hotbar_quick"
+  },
+
+  "curio_slot@chatelaine_inventory.replica_slot": {
+    "$item_collection_name": "chatelaine_curio_slots",
+    "$primary_button_name": "#chatelaine_curio_primary",
+    "$secondary_button_name": "#chatelaine_curio_secondary",
+    "$quick_button_name": "#chatelaine_curio_quick"
+  },
+  "pocket_curio_slot@chatelaine_inventory.curio_slot": {
+    "$cell_size": [28, 28],
+    "$item_size": [24, 24],
+    "$durability_size": [18, 1],
+    "$durability_offset": [0, 8],
+    "$hover_texture": "textures/ui/slot_disabled_hover_pocket",
+    "$selection_texture": "textures/ui/pocket_ui_highlight_selected_slot",
+    "$selection_size": ["100% + 4px", "100% + 4px"],
+    "$lock_badge_offset": [-1, -1]
+  },
+
+  "pocket_bag_scroll_content": {
+    "type": "input_panel",
+    "size": ["100%", "100%c + 2px"],
+    "controls": [
+      {
+        "bag_slots_panel": {
+          "type": "panel",
+          "size": ["100%", 84],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "controls": [
+            {
+              "pocket_bag_slot1@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot2@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot3@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot4@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot5@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot6@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot7@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot8@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot9@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot10@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot11@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot12@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot13@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot14@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot15@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot16@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot17@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot18@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot19@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot20@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot21@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot22@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot23@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot24@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot25@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot26@chatelaine_inventory.static_pocket_bag_slot": {}
+            },
+            {
+              "pocket_bag_slot27@chatelaine_inventory.static_pocket_bag_slot": {}
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "pocket_bag_scroll_panel@common.scrolling_panel": {
+    "size": ["100% - 22px", "100% - 14px"],
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "offset": [11, 7],
+    "layer": 2,
+    "$scrolling_content": "chatelaine_inventory.pocket_bag_scroll_content",
+    "$scrolling_pane_size": ["100%", "100%"],
+    "$scrolling_pane_size_touch": ["100%", "100%"],
+    "$scroll_view_control_size": ["100%", "100%"],
+    "$scroll_view_port_size": ["100%", "100%"],
+    "$scroll_view_port_max_size": ["100%", "100%"],
+    "$scroll_view_port_size_touch": ["100%", "100%"],
+    "$scroll_view_port_max_size_touch": ["100%", "100%"],
+    "$view_port_size": ["100%", "100%"],
+    "$view_port_size_touch": ["100%", "100%"],
+    "$scroll_bar_contained": true,
+    "$scroll_bar_contained_touch": true,
+    "$scroll_box_visible": false,
+    "$scroll_box_visible_touch": false,
+    "$show_background": false,
+    "$allow_scrolling_even_when_content_fits": false
+  },
+
+  "classic_toggle": {
+    "type": "button",
+    "size": [18, 18],
+    "layer": 3,
+    "default_control": "default",
+    "hover_control": "hover",
+    "pressed_control": "pressed",
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "#chatelaine_toggle",
+        "mapping_type": "pressed",
+        "consume_event": false
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "#chatelaine_toggle",
+        "mapping_type": "focused",
+        "consume_event": true
+      }
+    ],
+    "controls": [
+      {
+        "default": {
+          "type": "image",
+          "size": [10, 10],
+          "texture": "textures/ui/chatelaine/button",
+          "anchor_from": "center",
+          "anchor_to": "center"
+        }
+      },
+      {
+        "hover": {
+          "type": "image",
+          "size": [10, 10],
+          "texture": "textures/ui/chatelaine/button_highlighted",
+          "anchor_from": "center",
+          "anchor_to": "center"
+        }
+      },
+      {
+        "pressed": {
+          "type": "image",
+          "size": [10, 10],
+          "texture": "textures/ui/chatelaine/button_highlighted",
+          "anchor_from": "center",
+          "anchor_to": "center"
+        }
+      }
+    ]
+  },
+
+  "native_selection_probe": {
+    "type": "panel",
+    "size": [0, 0],
+    "visible": false,
+    "bindings": [
+      {
+        "binding_name": "(not (#inventory_selected_item = -1))",
+        "binding_name_override": "#visible",
+        "binding_condition": "always"
+      }
+    ]
+  },
+
+  "classic_embedded_root": {
+    "type": "panel",
+    "size": [88, 83],
+    "layer": 20,
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "controls": [
+      {
+        "slots_grid": {
+          "type": "grid",
+          "size": [18, 72],
+          "offset": [7, 7],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "grid_dimensions": [1, 4],
+          "collection_name": "chatelaine_curio_slots",
+          "grid_item_template": "chatelaine_inventory.curio_slot",
+          "visible": false
+        }
+      },
+      {
+        "expanded_slots_grid": {
+          "type": "grid",
+          "size": [72, 72],
+          "offset": [7, 7],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "grid_dimensions": [4, 4],
+          "maximum_grid_items": 16,
+          "collection_name": "chatelaine_curio_slots",
+          "grid_item_template": "chatelaine_inventory.curio_slot",
+          "visible": false
+        }
+      },
+      {
+        "native_selection_probe@chatelaine_inventory.native_selection_probe": {}
+      },
+      {
+        "toggle@chatelaine_inventory.classic_toggle": {
+          "offset": [79, 43],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left"
+        }
+      }
+    ]
+  },
+  "pocket_embedded_root": {
+    "type": "panel",
+    "size": [28, 112],
+    "layer": 20,
+    "offset": [-28, 0],
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "controls": [
+      {
+        "slots_grid": {
+          "type": "grid",
+          "size": [28, 112],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "grid_dimensions": [1, 4],
+          "collection_name": "chatelaine_curio_slots",
+          "grid_item_template": "chatelaine_inventory.pocket_curio_slot",
+          "visible": false
+        }
+      },
+      {
+        "expanded_slots_grid": {
+          "type": "grid",
+          "size": [112, 112],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "grid_dimensions": [4, 4],
+          "maximum_grid_items": 16,
+          "collection_name": "chatelaine_curio_slots",
+          "grid_item_template": "chatelaine_inventory.pocket_curio_slot",
+          "visible": false
+        }
+      },
+      {
+        "native_selection_probe@chatelaine_inventory.native_selection_probe": {}
+      },
+      {
+        "toggle@chatelaine_inventory.classic_toggle": {
+          "offset": [5, -18],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left"
+        }
+      }
+    ]
+  },
+
+  "held_item": {
+    "type": "panel",
+    "size": [18, 18],
+    "$held_renderer_size|default": [16, 16],
+    "$held_durability_size|default": [14, 1],
+    "$held_durability_offset|default": [0, 6],
+    "layer": 100,
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "offset": [-10000, -10000],
+    "visible": false,
+    "controls": [
+      {
+        "content": {
+          "type": "panel",
+          "size": ["100%", "100%"],
+          "controls": [
+            {
+              "item@chatelaine_inventory.layered_item_renderer": {
+                "size": "$held_renderer_size",
+                "layer": 50,
+                "anchor_from": "center",
+                "anchor_to": "center"
+              }
+            },
+            {
+              "durability": {
+                "type": "custom",
+                "renderer": "progress_bar_renderer",
+                "size": "$held_durability_size",
+                "offset": "$held_durability_offset",
+                "layer": 57,
+                "visible": false,
+                "property_bag": {
+                  "drop_shadow": true,
+                  "is_durability": true,
+                  "round_value": true
+                },
+                "bindings": [
+                  {
+                    "binding_name": "#chatelaine_held_durability_visible",
+                    "binding_name_override": "#visible",
+                    "binding_condition": "always"
+                  },
+                  {
+                    "binding_name": "#chatelaine_held_durability_visible",
+                    "binding_name_override": "#touch_progress_bar_visible",
+                    "binding_condition": "always"
+                  },
+                  {
+                    "binding_name": "#chatelaine_held_durability_total",
+                    "binding_name_override": "#progress_bar_total_amount",
+                    "binding_condition": "always"
+                  },
+                  {
+                    "binding_name": "#chatelaine_held_durability_current",
+                    "binding_name_override": "#progress_bar_current_amount",
+                    "binding_condition": "always"
+                  }
+                ]
+              }
+            },
+            {
+              "held_lock_in_inventory_badge": {
+                "type": "image",
+                "size": "$held_renderer_size",
+                "layer": 54,
+                "texture": "textures/ui/item_lock_yellow",
+                "anchor_from": "center",
+                "anchor_to": "center",
+                "bindings": [
+                  {
+                    "binding_name": "#chatelaine_held_lock_in_inventory",
+                    "binding_name_override": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "held_lock_in_slot_badge": {
+                "type": "image",
+                "size": "$held_renderer_size",
+                "layer": 55,
+                "texture": "textures/ui/item_lock_red",
+                "anchor_from": "center",
+                "anchor_to": "center",
+                "bindings": [
+                  {
+                    "binding_name": "#chatelaine_held_lock_in_slot",
+                    "binding_name_override": "#visible"
+                  }
+                ]
+              }
+            },
+            {
+              "count": {
+                "type": "label",
+                "layer": 56,
+                "anchor_from": "bottom_right",
+                "anchor_to": "bottom_right",
+                "shadow": true,
+                "text": "#chatelaine_held_count",
+                "bindings": [
+                  { "binding_name": "#chatelaine_held_count" }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "directional_split_bar": {
+    "type": "panel",
+    "size": [80, 26],
+    "layer": 110,
+    "$visibility_binding_name|default": "#chatelaine_split_down_visible",
+    "$texture_to_use|default": "textures/ui/stack_progress_bar_down_arrow",
+    "$fill_bar_offset|default": [0, 0.5],
+    "bindings": [
+      {
+        "binding_name": "$visibility_binding_name",
+        "binding_name_override": "#visible",
+        "binding_condition": "always"
+      }
+    ],
+    "controls": [
+      {
+        "arrow": {
+          "type": "image",
+          "texture": "$texture_to_use",
+          "controls": [
+            {
+              "fill": {
+                "type": "image",
+                "layer": 111,
+                "texture": "textures/ui/stack_progress_bar_fill",
+                "size": [64, 10],
+                "offset": "$fill_bar_offset",
+                "clip_direction": "left",
+                "clip_pixelperfect": false,
+                "bindings": [
+                  {
+                    "binding_name": "#chatelaine_split_ratio",
+                    "binding_name_override": "#clip_ratio",
+                    "binding_condition": "always"
+                  }
+                ]
+              }
+            },
+            {
+              "text": {
+                "type": "label",
+                "layer": 112,
+                "offset": "$fill_bar_offset",
+                "shadow": true,
+                "text": "#chatelaine_split_text",
+                "bindings": [ { "binding_name": "#chatelaine_split_text" } ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "split_overlay": {
+    "type": "panel",
+    "size": [0, 0],
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "layer": 110,
+    "visible": false,
+    "controls": [
+      {
+        "down@chatelaine_inventory.directional_split_bar": {
+          "anchor_from": "bottom_middle",
+          "anchor_to": "top_middle",
+          "offset": [0, 4],
+          "$visibility_binding_name": "#chatelaine_split_down_visible",
+          "$texture_to_use": "textures/ui/stack_progress_bar_down_arrow",
+          "$fill_bar_offset": [0, 0.5]
+        }
+      },
+      {
+        "up@chatelaine_inventory.directional_split_bar": {
+          "anchor_from": "top_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -7],
+          "$visibility_binding_name": "#chatelaine_split_up_visible",
+          "$texture_to_use": "textures/ui/stack_progress_bar_up_arrow",
+          "$fill_bar_offset": [0, -0.5]
+        }
+      },
+      {
+        "left@chatelaine_inventory.directional_split_bar": {
+          "anchor_from": "left_middle",
+          "anchor_to": "right_middle",
+          "offset": [-4, 0],
+          "$visibility_binding_name": "#chatelaine_split_left_visible",
+          "$texture_to_use": "textures/ui/stack_progress_bar_left_side_arrow",
+          "$fill_bar_offset": [0, -0.5]
+        }
+      },
+      {
+        "right@chatelaine_inventory.directional_split_bar": {
+          "anchor_from": "right_middle",
+          "anchor_to": "left_middle",
+          "offset": [4, 0],
+          "$visibility_binding_name": "#chatelaine_split_right_visible",
+          "$texture_to_use": "textures/ui/stack_progress_bar_right_side_arrow",
+          "$fill_bar_offset": [0, -0.5]
+        }
+      }
+    ]
+  },
+  "legacy_split_overlay": {
+    "type": "panel",
+    "size": [15, 3],
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "layer": 110,
+    "visible": false,
+    "controls": [
+      {
+        "progress": {
+          "type": "custom",
+          "renderer": "progress_bar_renderer",
+          "size": ["100%", "100%"],
+          "layer": 1,
+          "property_bag": {
+            "#progress_bar_visible": false,
+            "#touch_progress_bar_visible": false,
+            "#progress_bar_total_amount": 1,
+            "#progress_bar_current_amount": 0
+          },
+          "bindings": [
+            {
+              "binding_name": "#chatelaine_legacy_progress_visible",
+              "binding_name_override": "#progress_bar_visible",
+              "binding_condition": "always"
+            },
+            {
+              "binding_name": "#chatelaine_legacy_progress_visible",
+              "binding_name_override": "#touch_progress_bar_visible",
+              "binding_condition": "always"
+            },
+            {
+              "binding_name": "#chatelaine_legacy_progress_total",
+              "binding_name_override": "#progress_bar_total_amount",
+              "binding_condition": "always_when_visible"
+            },
+            {
+              "binding_name": "#chatelaine_legacy_progress_current",
+              "binding_name_override": "#progress_bar_current_amount",
+              "binding_condition": "always_when_visible"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "touch_selected_item_details": {
+    "type": "panel",
+    "size": ["100%c", "100%c"],
+    "layer": 120,
+    "anchor_from": "bottom_middle",
+    "anchor_to": "bottom_middle",
+    "offset": "$touch_details_offset",
+    "$touch_details_offset|default": [0, -16],
+    "controls": [
+      {
+        "item_panel_image": {
+          "type": "image",
+          "size": ["100%c + 8px", "100%c + 8px"],
+          "layer": 120,
+          "alpha": "@common.anim_item_details_alpha",
+          "texture": "textures/ui/purpleBorder",
+          "controls": [
+            {
+              "item_text_label": {
+                "type": "label",
+                "layer": 1,
+                "alpha": "@common.anim_item_details_alpha",
+                "text": "#chatelaine_touch_hover_text",
+                "color": "$item_hover_text_color",
+                "localize": false,
+                "enable_profanity_filter": false,
+                "bindings": [
+                  { "binding_name": "#chatelaine_touch_hover_text" }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "touch_selected_item_details_pocket@chatelaine_inventory.touch_selected_item_details": {
+    "$touch_details_offset": [0, -37]
+  },
+  "fly_item@chatelaine_inventory.layered_item_renderer": {
+    "size": [16, 16],
+    "layer": 105,
+    "anchor_from": "top_left",
+    "anchor_to": "top_left",
+    "visible": false
+  },
+
+  "drop_surface": {
+    "type": "input_panel",
+    "size": ["100%", "100%"],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "layer": -1,
+    "visible": false,
+    "bindings": [
+      {
+        "binding_name": "#chatelaine_drop_active",
+        "binding_name_override": "#visible",
+        "binding_condition": "always"
+      }
+    ],
+    "button_mappings": [
+      {
+        "from_button_id": "button.menu_select",
+        "to_button_id": "#chatelaine_drop_primary",
+        "mapping_type": "pressed"
+      },
+      {
+        "from_button_id": "button.menu_secondary_select",
+        "to_button_id": "#chatelaine_drop_secondary",
+        "mapping_type": "pressed"
+      },
+      {
+        "from_button_id": "button.menu_ok",
+        "to_button_id": "#chatelaine_drop_primary",
+        "mapping_type": "pressed"
+      }
+    ]
+  },
+
+  "classic_replica_root": {
+    "type": "panel",
+    "size": [176, 166],
+    "layer": 25,
+    "visible": false,
+    "controls": [
+      {
+        "nodrop_zone_right@common.root_panel": {
+          "size": [79, 83],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [97, 0],
+          "layer": 1
+        }
+      },
+      {
+        "nodrop_zone_toggle_top@common.root_panel": {
+          "size": [9, 43],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [88, 0],
+          "layer": 1
+        }
+      },
+      {
+        "nodrop_zone_toggle_bottom@common.root_panel": {
+          "size": [9, 22],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [88, 61],
+          "layer": 1
+        }
+      },
+      {
+        "bag_grid": {
+          "type": "grid",
+          "size": [162, 54],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -26],
+          "grid_dimensions": [9, 3],
+          "collection_name": "chatelaine_inventory_bag",
+          "grid_item_template": "chatelaine_inventory.classic_bag_slot"
+        }
+      },
+      {
+        "hotbar_grid": {
+          "type": "grid",
+          "size": [162, 18],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -5],
+          "grid_dimensions": [9, 1],
+          "collection_name": "chatelaine_inventory_hotbar",
+          "grid_item_template": "chatelaine_inventory.classic_hotbar_slot"
+        }
+      }
+    ]
+  },
+  "classic_overlay_root": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "layer": 2000,
+    "visible": false,
+    "controls": [
+      {
+        "held_item@chatelaine_inventory.held_item": {
+          "size": [20, 20],
+          "$held_renderer_size": [18, 18],
+          "$held_durability_size": [14, 1],
+          "$held_durability_offset": [0, 6]
+        }
+      },
+      { "split_overlay@chatelaine_inventory.split_overlay": {} },
+      { "legacy_split_overlay@chatelaine_inventory.legacy_split_overlay": {} },
+      { "fly_item@chatelaine_inventory.fly_item": {} }
+    ]
+  },
+  "pocket_replica_root": {
+    "type": "panel",
+    "size": [260, 36],
+    "anchor_from": "center",
+    "anchor_to": "center",
+    "layer": 30,
+    "visible": false,
+    "controls": [
+      {
+        "hotbar_background@common.common_panel": {
+          "size": [260, 36],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "layer": 1,
+          "$show_close_button": false
+        }
+      },
+      {
+        "hotbar_grid": {
+          "type": "grid",
+          "size": [252, 28],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [0, -4],
+          "layer": 2,
+          "grid_dimensions": [9, 1],
+          "collection_name": "chatelaine_inventory_hotbar",
+          "grid_item_template": "chatelaine_inventory.pocket_hotbar_slot"
+        }
+      }
+    ]
+  },
+
+  "pocket_overlay_root": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "layer": 2000,
+    "visible": false,
+    "controls": [
+      {
+        "held_item@chatelaine_inventory.held_item": {
+          "size": [28, 28],
+          "$held_renderer_size": [21, 21],
+          "$held_durability_size": [18, 1],
+          "$held_durability_offset": [0, 8]
+        }
+      },
+      { "split_overlay@chatelaine_inventory.split_overlay": {} },
+      { "legacy_split_overlay@chatelaine_inventory.legacy_split_overlay": {} },
+      { "fly_item@chatelaine_inventory.fly_item": { "size": [24, 24] } }
+    ]
+  },
+
+  "pocket_bag_root": {
+    "type": "panel",
+    "size": ["100%", "100%"],
+    "layer": 20,
+    "visible": false,
+    "controls": [
+      {
+        "content_background": {
+          "type": "image",
+          "size": ["100% - 12px", "100% - 12px"],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [6, 6],
+          "layer": 1,
+          "texture": "textures/ui/White",
+          "color": [0.39, 0.39, 0.39]
+        }
+      },
+      {
+        "nodrop_zone@common.root_panel": {
+          "size": ["100% - 12px", "100% - 12px"],
+          "anchor_from": "top_left",
+          "anchor_to": "top_left",
+          "offset": [6, 6],
+          "layer": 1
+        }
+      },
+      {
+        "bag_scroll_panel@chatelaine_inventory.pocket_bag_scroll_panel": {
+          "visible": false
+        }
+      }
+    ]
+  }
+}
+
+

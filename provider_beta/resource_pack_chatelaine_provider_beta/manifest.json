@@ -1,0 +1,29 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "垂佩（Chatelaine） Provider Beta - 资源包",
+    "description": "Resources for the official minimal Chatelaine example",
+    "uuid": "b9f0fb50-c6bc-4073-a4a7-8d2479cc860a",
+    "version": [
+      1,
+      0,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      20,
+      10
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "79cc3db1-f412-46c3-abf4-065b06edf3fe",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ]
+}

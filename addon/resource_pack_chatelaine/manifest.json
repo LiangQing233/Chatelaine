@@ -1,0 +1,17 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "垂佩（Chatelaine） - 资源包",
+    "description": "Chatelaine core UI and standard empty-slot resources",
+    "uuid": "ebda59ac-0cec-427a-bcc8-b28ed54ca441",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 20, 10]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "b606b3a0-33de-4b37-92a0-96efad7ccb8e",
+      "version": [1, 0, 0]
+    }
+  ]
+}

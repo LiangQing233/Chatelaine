@@ -1,0 +1,13 @@
+{
+  "format_version": "1.10",
+  "minecraft:item": {
+    "description": {
+      "identifier": "chatelaine_provider_beta:test_ring",
+      "category": "equipment"
+    },
+    "components": {
+      "minecraft:icon": "emerald",
+      "minecraft:hover_text_color": "green"
+    }
+  }
+}

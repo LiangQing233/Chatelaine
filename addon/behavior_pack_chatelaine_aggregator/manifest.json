@@ -1,0 +1,23 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "垂佩（Chatelaine） - 行为包",
+    "description": "Data-driven Chatelaine registry and player equipment core",
+    "uuid": "1180a889-c130-4a77-97c3-23fba57fc136",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 20, 10]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "6cc59b88-e2f1-4ed1-b619-ed7e3d78cbed",
+      "version": [1, 0, 0]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "ebda59ac-0cec-427a-bcc8-b28ed54ca441",
+      "version": [1, 0, 0]
+    }
+  ]
+}

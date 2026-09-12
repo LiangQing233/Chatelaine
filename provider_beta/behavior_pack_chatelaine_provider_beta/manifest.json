@@ -1,0 +1,39 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "垂佩（Chatelaine） Provider Beta - 行为包",
+    "description": "Official minimal Chatelaine registration example",
+    "uuid": "47b8d646-5176-4ab7-a372-a8ce398f40a3",
+    "version": [
+      1,
+      0,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      20,
+      10
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "7cfc8308-03d0-4cc1-9988-82077ae1f038",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "b9f0fb50-c6bc-4073-a4a7-8d2479cc860a",
+      "version": [
+        1,
+        0,
+        0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "format_version": "0.0.1",
+  "name": "chatelaine_clear",
+  "description": "清除目标玩家全部垂佩槽中的匹配物品",
+  "permission_level": "game_directors",
+  "args": [
+    {
+      "name": "target",
+      "type": "target"
+    },
+    {
+      "name": "newitemname",
+      "type": "item",
+      "default": null
+    },
+    {
+      "name": "auxvalue",
+      "type": "int",
+      "default": null
+    },
+    {
+      "name": "maxcount",
+      "type": "int",
+      "default": null
+    }
+  ]
+}

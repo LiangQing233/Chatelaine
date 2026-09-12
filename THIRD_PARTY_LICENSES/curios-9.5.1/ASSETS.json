@@ -1,0 +1,127 @@
+{
+  "artifact": "top.theillusivec4.curios:curios-neoforge:9.5.1+1.21.1",
+  "artifact_url": "https://maven.theillusivec4.top/top/theillusivec4/curios/curios-neoforge/9.5.1+1.21.1/curios-neoforge-9.5.1+1.21.1.jar",
+  "artifact_sha256": "a45df2125c26219974aba7507ffc9afe7b83acc941a386af3faacb1cc0056fde",
+  "upstream_copyright": "Copyright (C) 2018-2024 C4",
+  "modifications_copyright": "Copyright (c) 2026 LiangQing233",
+  "license": "LGPL-3.0-or-later",
+  "files": [
+    {
+      "upstream_path": "assets/curios/textures/gui/curios/button.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/gui/curios/button.png",
+      "upstream_sha256": "6455f0731ad44626219eb4e7f6b69540c15e3870ddacf0a8cbd224ac91e5499e",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/button.png",
+      "distributed_sha256": "6455f0731ad44626219eb4e7f6b69540c15e3870ddacf0a8cbd224ac91e5499e",
+      "modification": "Unmodified; relocated only"
+    },
+    {
+      "upstream_path": "assets/curios/textures/gui/curios/button_highlighted.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/gui/curios/button_highlighted.png",
+      "upstream_sha256": "5d25adeebf0a57890050f08d6f8bea6c3d3eac7afab79552bb378187ce095cbb",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/button_highlighted.png",
+      "distributed_sha256": "5d25adeebf0a57890050f08d6f8bea6c3d3eac7afab79552bb378187ce095cbb",
+      "modification": "Unmodified; relocated only"
+    },
+    {
+      "upstream_path": "assets/curios/textures/gui/curios/button_small.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/gui/curios/button_small.png",
+      "upstream_sha256": "a13a153e9512a6c84d0880a7a417315e7d18360a517dbe47e7517c3b2e92a171",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/button_small.png",
+      "distributed_sha256": "a13a153e9512a6c84d0880a7a417315e7d18360a517dbe47e7517c3b2e92a171",
+      "modification": "Unmodified; relocated only"
+    },
+    {
+      "upstream_path": "assets/curios/textures/gui/curios/button_small_highlighted.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/gui/curios/button_small_highlighted.png",
+      "upstream_sha256": "27d3e4b9c0851051a19db4f24a2051c2f355e743f2a84815ab1c852e551fa964",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/button_small_highlighted.png",
+      "distributed_sha256": "27d3e4b9c0851051a19db4f24a2051c2f355e743f2a84815ab1c852e551fa964",
+      "modification": "Unmodified; relocated only"
+    },
+    {
+      "upstream_path": "assets/curios/textures/slot/empty_back_slot.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/slot/empty_back_slot.png",
+      "upstream_sha256": "889cbed451d61d7aa1cb2871d55e9d54302f78c16d57d3cbf835bf54cbbc30f0",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/empty_back_slot.png",
+      "distributed_sha256": "a6acfbbc8bb9896b930cb76e77d8d65981ff83978f51795e3641e285d2629ae5",
+      "modification": "RGBA (85,85,85,255) -> (25,32,34,255); transparent pixels -> (0,0,0,0); alpha mask unchanged"
+    },
+    {
+      "upstream_path": "assets/curios/textures/slot/empty_belt_slot.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/slot/empty_belt_slot.png",
+      "upstream_sha256": "6c738a3441a2706110a91bc1b9aec848958665dd9e1633fc524823383fb76811",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/empty_belt_slot.png",
+      "distributed_sha256": "102573a5c36ca8f159a3093be4ac07faf372df2debcd9b9a6a688d257f4db32b",
+      "modification": "RGBA (85,85,85,255) -> (25,32,34,255); transparent pixels -> (0,0,0,0); alpha mask unchanged"
+    },
+    {
+      "upstream_path": "assets/curios/textures/slot/empty_body_slot.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/slot/empty_body_slot.png",
+      "upstream_sha256": "c05e12cec673e1b2319afa2533e2c27356c6a9870c5dba560fb1236565118f32",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/empty_body_slot.png",
+      "distributed_sha256": "19e965d559eec389ca52a9169adead5bcf573a2234a879203398709ba2c87581",
+      "modification": "RGBA (85,85,85,255) -> (25,32,34,255); transparent pixels -> (0,0,0,0); alpha mask unchanged"
+    },
+    {
+      "upstream_path": "assets/curios/textures/slot/empty_bracelet_slot.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/slot/empty_bracelet_slot.png",
+      "upstream_sha256": "eab8b7419148bd08bfffe26997063e23781289fd1348311ac41284a4886ac7fb",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/empty_bracelet_slot.png",
+      "distributed_sha256": "ff875c6784ed390cab5f67caf2dd788939f3422e1955f1f716cf01532fc4a689",
+      "modification": "RGBA (85,85,85,255) -> (25,32,34,255); transparent pixels -> (0,0,0,0); alpha mask unchanged"
+    },
+    {
+      "upstream_path": "assets/curios/textures/slot/empty_charm_slot.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/slot/empty_charm_slot.png",
+      "upstream_sha256": "9862b3a181dff7ae5cb791bf093239613a7cfe9e30d729c5ec9ac80185a9fd72",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/empty_charm_slot.png",
+      "distributed_sha256": "78663a304576286509ad42b03b58dd5a44cd2d4c4ff52b00b51ad5d5e98a8376",
+      "modification": "RGBA (85,85,85,255) -> (25,32,34,255); transparent pixels -> (0,0,0,0); alpha mask unchanged"
+    },
+    {
+      "upstream_path": "assets/curios/textures/slot/empty_curio_slot.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/slot/empty_curio_slot.png",
+      "upstream_sha256": "90485c268d8287456a9dc7a5dedcbc7f42f38c4964b5d1b2c62cbf32ee7b1ddc",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/empty_curio_slot.png",
+      "distributed_sha256": "56b5150f40cbce7c52d75cd6a20cb6051a4f5df297d0bf6205685f7680721d57",
+      "modification": "RGBA (85,85,85,255) -> (25,32,34,255); transparent pixels -> (0,0,0,0); alpha mask unchanged"
+    },
+    {
+      "upstream_path": "assets/curios/textures/slot/empty_hands_slot.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/slot/empty_hands_slot.png",
+      "upstream_sha256": "16987680b46b5915645465b86386d73f30ef43849ccddbd4eadd088f5da8a538",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/empty_hands_slot.png",
+      "distributed_sha256": "8b0a796c0012152b6277a3936f4a5bcc62aa32f154376519c848cebd32336d43",
+      "modification": "RGBA (85,85,85,255) -> (25,32,34,255); transparent pixels -> (0,0,0,0); alpha mask unchanged"
+    },
+    {
+      "upstream_path": "assets/curios/textures/slot/empty_head_slot.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/slot/empty_head_slot.png",
+      "upstream_sha256": "1055bdfee57bc8f038b6261a4f1e9a07e17bc9b009ebb2fa1d30b0ccbb3699fb",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/empty_head_slot.png",
+      "distributed_sha256": "cf46f42f37a7b2c846a42761791b0a8052c65aa387b2d25d97586665476279fc",
+      "modification": "RGBA (85,85,85,255) -> (25,32,34,255); transparent pixels -> (0,0,0,0); alpha mask unchanged"
+    },
+    {
+      "upstream_path": "assets/curios/textures/slot/empty_necklace_slot.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/slot/empty_necklace_slot.png",
+      "upstream_sha256": "b4ab29cc0f91c8a8223f18a51ab51718e47c93c8f98d7b2114122f57d8e1b556",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/empty_necklace_slot.png",
+      "distributed_sha256": "ab5aeb45df4ec0f6f6178ce8ccea9d1bc1a02c7f53bc5bb3b6b50d4825ae1b0d",
+      "modification": "RGBA (85,85,85,255) -> (25,32,34,255); transparent pixels -> (0,0,0,0); alpha mask unchanged"
+    },
+    {
+      "upstream_path": "assets/curios/textures/slot/empty_ring_slot.png",
+      "source_path": "THIRD_PARTY_LICENSES/curios-9.5.1/source/assets/curios/textures/slot/empty_ring_slot.png",
+      "upstream_sha256": "f22fe16dfc10721d11aa467269bbfb0b9171c958cbfb803b67264fd6592b3f0f",
+      "distributed_path": "addon/resource_pack_chatelaine/textures/ui/chatelaine/empty_ring_slot.png",
+      "distributed_sha256": "4900e86b00beae8339ecffc652aff32efbb4ac60991e8455a82675301353559f",
+      "modification": "RGBA (85,85,85,255) -> (25,32,34,255); transparent pixels -> (0,0,0,0); alpha mask unchanged"
+    }
+  ],
+  "license_sha256": {
+    "LICENSE": "951a45e06788cc01755e42838b801eee5229ce6cbd2405eee434cbed67c36844",
+    "COPYING": "8b1ba204bb69a0ade2bfcf65ef294a920f6bb361b317dba43c7ef29d96332b9b",
+    "COPYING.LESSER": "e3a994d82e644b03a792a930f574002658412f62407f5fee083f2555c5f23118"
+  }
+}
